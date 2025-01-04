@@ -40,6 +40,8 @@ Google: 90% of our engineers use the software you wrote (Homebrew), but you canâ
 #         self.left = None
 #         self.right = None
 
+#1
+
 class Solution:
     def invertTree(self, root: TreeNode) -> TreeNode:
         head = root
@@ -54,3 +56,17 @@ class Solution:
               root.right = temp
               self.invertTree(root.left)
               self.invertTree(root.right)
+
+
+#2
+
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root == None:
+            return 
+        tempPtr = root.right
+        root.right = root.left
+        root.left = tempPtr
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        return root

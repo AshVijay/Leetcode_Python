@@ -14,8 +14,9 @@ Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
 
 """
 
+# Solution 1:
 
-class Solution:
+ class Solution:
     def maxProduct(self, nums: List[int]) -> int:
         """
         Driver function to split nums in a list of segments based on 0s
@@ -75,3 +76,33 @@ class Solution:
         for i in range(len(nums)):
               prod*=nums[i]
         return prod
+
+# Solution 2:
+
+ class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+
+        # calculate the max prod from left to right
+        maxProdL2R = nums[0]
+        prodTillNow = nums[0]
+        ptr = 1
+        while ptr < len(nums):
+            if prodTillNow == 0:
+                prodTillNow = 1
+            prodTillNow *= nums[ptr]
+            if max(prodTillNow, nums[ptr]) > maxProdL2R:
+                maxProdL2R = max(prodTillNow, nums[ptr])
+            ptr+=1
+
+        # calculate the max prod from right to left
+        ptr = len(nums) - 2  
+        maxProdR2L = nums[-1]  
+        prodTillNow = nums[-1]  
+        while ptr >= 0 :
+            if prodTillNow == 0:
+                prodTillNow = 1
+            prodTillNow *= nums[ptr]
+            if max(prodTillNow, nums[ptr]) > maxProdR2L:
+                maxProdR2L = max(prodTillNow, nums[ptr])
+            ptr-=1 
+        return max(maxProdL2R, maxProdR2L)

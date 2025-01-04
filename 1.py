@@ -12,6 +12,8 @@ return [0, 1].
 
 """
 
+#1) 
+
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         mapper = {}
@@ -22,3 +24,13 @@ class Solution:
               else:
                    final = [mapper[nums[i]],i]
         return final
+
+#2)
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        diffMap = {} # map from diff value to index of element being subtracted
+        for i in range(len(nums)):
+            if nums[i] in diffMap: 
+                return [diffMap[nums[i]], i]
+            diffMap[target - nums[i]] = i

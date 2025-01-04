@@ -30,6 +30,7 @@ Output: true
 
 """
 
+#1
 
 class Solution:
     def isValid(self, s: str) -> bool:
@@ -52,3 +53,25 @@ class Solution:
                      stack.pop(-1)
                        
         return len(stack)==0
+
+#2
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        bracketMap = {")":"(", "}": "{", "]": "["}
+        stack = [s[0]]
+    
+        for i in range(1, len(s)):
+            if (len(stack) > 0) and (s[i] in bracketMap.keys()) and (stack[-1] == bracketMap[s[i]]):
+                # if the current element in the stack is a closing bracket of the top most open bracket in the stack, remove the topmost stack element
+                stack.pop(-1)  
+            else:
+                # append the current element to the stack and continue iteration
+                stack.append(s[i])      
+            i+=1
+
+        # if there are elements in the stack after a single iteration, it means we couldnt match all brackets
+        if len(stack) > 0:
+            return False
+        else: 
+            return True
